@@ -39,12 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
     String? clientSecret = await StripeController().paymentIntent({
       'amount': '500',
       'currency': 'USD',
-      'type': 'card',
+      'payment_method_types[]': 'card',
     });
+    log('Client Secret: $clientSecret');
     final token =
         paymentResult['paymentMethodData']['tokenizationData']['token'];
-    final tokenJson = Map.castFrom(json.decode(token));
-    log(tokenJson.toString());
+   final tokenJson = Map.castFrom(json.decode(token));
+   log(tokenJson.toString());
 
     final params = PaymentMethodParams.cardFromToken(
       paymentMethodData: tokenJson['id'],

@@ -15,16 +15,16 @@ class StripeController {
       http.Response? response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: <String, String>{
-          'authorization': stripeSecretKey,
+          'authorization': 'bearer $stripeSecretKey',
         },
         body: data,
       );
       log('response gotten');
       log(response.statusCode.toString());
+      log(response.body.toString());
       if (int.parse(response.statusCode.toString().substring(0, 1)) == 2) {
         log('response was in 200s');
         var jsonData = jsonDecode(response.body);
-        log(jsonData.toString());
         return jsonData['client_secret'];
       }
     } catch (exception) {
