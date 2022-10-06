@@ -6,7 +6,7 @@ import '.env.dart';
 
 void main() {
    WidgetsFlutterBinding.ensureInitialized();
-   Stripe.publishableKey = EnviromentVariables().publishableKey;
+   Stripe.publishableKey = stripePublishableKey;
   runApp(const MyApp());
 }
 
