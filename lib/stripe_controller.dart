@@ -9,7 +9,7 @@ class StripeController {
   // ===========================================================================
   // Create a payment intent
   // ===========================================================================
-  Future<String?> paymentIntent(Map<String, dynamic> data) async {
+  Future<Map<String, dynamic>?> paymentIntent(Map<String, dynamic> data) async {
     try {
       log('çreating payment intent');
       http.Response? response = await http.post(
@@ -25,7 +25,7 @@ class StripeController {
       if (int.parse(response.statusCode.toString().substring(0, 1)) == 2) {
         log('response was in 200s');
         var jsonData = jsonDecode(response.body);
-        return jsonData['client_secret'];
+        return jsonData;
       }
     } catch (exception) {
       log(exception.toString());
